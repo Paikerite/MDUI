@@ -1,0 +1,20 @@
+﻿<Application x:Class="ManagedDoom_extension.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ManagedDoom_extension"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Themes/OldStyleButton.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleTextBox.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleGroupBox.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleCheckBox.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleWindow.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleCombobox.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleListBox.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleExpander.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
