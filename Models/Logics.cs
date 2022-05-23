@@ -206,10 +206,9 @@ namespace ManagedDoom_extension.Models
                 using (Process myProcess = new Process())
                 {
                     myProcess.StartInfo.UseShellExecute = false;
-                    // You can start any process, HelloWorld is a do-nothing example.
                     myProcess.StartInfo.FileName = PathToSourcePort;
                     myProcess.StartInfo.CreateNoWindow = false;
-                    myProcess.StartInfo.Arguments = string.Join('', Command);
+                    myProcess.StartInfo.Arguments = string.Join(' ', Command);
                     myProcess.Start();
                     // This code assumes the process you are starting will terminate itself.
                     // Given that it is started without a window so you cannot terminate it
