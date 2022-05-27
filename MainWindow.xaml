@@ -55,13 +55,7 @@
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Fast monsters" Margin="0,2,0,2" IsChecked="{Binding FastMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No monsters" Margin="0,2,0,2" IsChecked="{Binding NoMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Respawn" Margin="0,2,0,2" IsChecked="{Binding Respawn, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
-                    <ComboBox Style="{StaticResource OldStyleComboBox}" SelectedIndex="0" Margin="0,2,0,2">
-                        <ComboBoxItem Content="1 - Baby"/>
-                        <ComboBoxItem Content="2 - Easy"/>
-                        <ComboBoxItem Content="3 - Medium"/>
-                        <ComboBoxItem Content="4 - Hard"/>
-                        <ComboBoxItem Content="5 - Nightmare"/>
-                    </ComboBox>
+                    <ComboBox Style="{StaticResource OldStyleComboBox}" ItemsSource="{Binding Skills}" SelectedItem="{Binding SelectedItem}"  SelectedIndex="0" Margin="0,2,0,2"/>
                 </StackPanel>
                 <ListBox Margin="5,0,0,0" Style="{StaticResource OldStyleListBox}" Width="100" SelectedIndex="-1" FontSize="11">
                     <ListBoxItem Content="Select map" FontSize="11" IsEnabled="False" Foreground="#FF958831"/> <!--#aaad71-->

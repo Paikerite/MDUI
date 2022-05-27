@@ -179,7 +179,7 @@ namespace ManagedDoom_extension.Models
             if (response == true)
             {
                 string filepth = ofd.FileName;
-                PathToWad = filepth;
+                PathToWad = "-iwad "+filepth;
             }
 
             if (Command.ElementAtOrDefault(1) != null)

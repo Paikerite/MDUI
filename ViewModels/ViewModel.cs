@@ -1,6 +1,7 @@
 ﻿using ManagedDoom_extension.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,21 @@ namespace ManagedDoom_extension.ViewModels
     public class ViewModel : INotifyPropertyChanged
     {
         private Logics logics;
+        private ObservableCollection<Skills> skills;
         public ViewModel()
         {
             logics = new Logics
             {
+
+            };
+
+            skills = new ObservableCollection<Skills>()
+            {
+                new Skills(){Id = 1, Skill="1 - Baby"},
+                new Skills(){Id = 2, Skill="2 - Easy"},
+                new Skills(){Id = 3, Skill="3 - Medium"},
+                new Skills(){Id = 4, Skill="4 - Hard"},
+                new Skills(){Id = 5, Skill="5 - Nightmare"}
             };
         }
         //Paths
@@ -48,10 +60,16 @@ namespace ManagedDoom_extension.ViewModels
             set { logics.Respawn = value; OnPropertyChange(nameof(Respawn)); }
         }
 
-        public int Skill 
-        { 
-            get { return logics.Skill; } 
-            set { logics.Skill = value;  OnPropertyChange(nameof(Skill)); }
+        public ObservableCollection<Skills> Skills
+        {
+            get { return skills; }
+            set { skills = value; OnPropertyChange(nameof(Skills)); }
+        }
+        private Skills selectedItem = new Skills();
+        public Skills SelectedItem
+        {
+            get { return selectedItem; }
+            set { selectedItem = value; OnPropertyChange(nameof(SelectedItem)); }
         }
 
         public int Episode
