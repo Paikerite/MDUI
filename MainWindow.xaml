@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagedDoom_extension.ViewModels" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DataContext="{d:DesignInstance Type=local:ViewModel}"
         mc:Ignorable="d"
         Title="ManagedDoom-extension" MaxHeight="640" MaxWidth="320" Height="480" Width="320" MinHeight="320" MinWidth="160"
@@ -55,18 +56,16 @@
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Fast monsters" Margin="0,2,0,2" IsChecked="{Binding FastMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No monsters" Margin="0,2,0,2" IsChecked="{Binding NoMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Respawn" Margin="0,2,0,2" IsChecked="{Binding Respawn, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
-                    <ComboBox Style="{StaticResource OldStyleComboBox}" ItemsSource="{Binding Skills}" SelectedItem="{Binding SelectedItem}"  SelectedIndex="0" Margin="0,2,0,2"/>
+                    <ComboBox Style="{StaticResource OldStyleComboBox}" ItemsSource="{Binding Skills}" SelectedItem="{Binding SelectedItemSkill}" SelectedIndex="0" Margin="0,2,0,2">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding IsChangedSkill}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </StackPanel>
-                <ListBox Margin="5,0,0,0" Style="{StaticResource OldStyleListBox}" Width="100" SelectedIndex="-1" FontSize="11">
-                    <ListBoxItem Content="Select map" FontSize="11" IsEnabled="False" Foreground="#FF958831"/> <!--#aaad71-->
-                    <ListBoxItem Content="MAP01"/>
-                    <ListBoxItem Content="MAP02"/>
-                    <ListBoxItem Content="MAP03"/>
-                    <ListBoxItem Content="MAP03"/>
-                    <ListBoxItem Content="MAP03"/>
-                    <ListBoxItem Content="MAP03"/>
-                    <ListBoxItem Content="MAP03"/>
-                    <ListBoxItem Content="MAP03"/>
+                <ListBox Margin="5,0,0,0" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" Width="100" SelectedIndex="-1" FontSize="11">
+                    <!--<ListBoxItem Content="Select episode" FontSize="11" IsEnabled="False" Foreground="#FF958831"/>--> <!--#aaad71-->
                     
                 </ListBox>
             </StackPanel>

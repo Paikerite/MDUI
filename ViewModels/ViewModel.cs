@@ -12,7 +12,8 @@ namespace ManagedDoom_extension.ViewModels
     public class ViewModel : INotifyPropertyChanged
     {
         private Logics logics;
-        private ObservableCollection<Skills> skills;
+        private ObservableCollection<ItemCombobox> skills;
+        private ObservableCollection<ItemCombobox> episodes;
         public ViewModel()
         {
             logics = new Logics
@@ -20,13 +21,21 @@ namespace ManagedDoom_extension.ViewModels
 
             };
 
-            skills = new ObservableCollection<Skills>()
+            skills = new ObservableCollection<ItemCombobox>()
             {
-                new Skills(){Id = 1, Skill="1 - Baby"},
-                new Skills(){Id = 2, Skill="2 - Easy"},
-                new Skills(){Id = 3, Skill="3 - Medium"},
-                new Skills(){Id = 4, Skill="4 - Hard"},
-                new Skills(){Id = 5, Skill="5 - Nightmare"}
+                new ItemCombobox(){Id = 1, Item="1 - Baby"},
+                new ItemCombobox(){Id = 2, Item="2 - Easy"},
+                new ItemCombobox(){Id = 3, Item="3 - Medium"},
+                new ItemCombobox(){Id = 4, Item="4 - Hard"},
+                new ItemCombobox(){Id = 5, Item="5 - Nightmare"}
+            };
+
+            episodes = new ObservableCollection<ItemCombobox>()
+            {
+                new ItemCombobox(){Id = 1, Item="1 episode"},
+                new ItemCombobox(){Id = 2, Item="2 episode"},
+                new ItemCombobox(){Id = 3, Item="3 episode"},
+                new ItemCombobox(){Id = 4, Item="4 episode"}
             };
         }
         //Paths
@@ -60,22 +69,28 @@ namespace ManagedDoom_extension.ViewModels
             set { logics.Respawn = value; OnPropertyChange(nameof(Respawn)); }
         }
 
-        public ObservableCollection<Skills> Skills
+        public ObservableCollection<ItemCombobox> Skills
         {
             get { return skills; }
             set { skills = value; OnPropertyChange(nameof(Skills)); }
         }
-        private Skills selectedItem = new Skills();
-        public Skills SelectedItem
+
+        public ItemCombobox SelectedItemSkill
         {
-            get { return selectedItem; }
-            set { selectedItem = value; OnPropertyChange(nameof(SelectedItem)); }
+            get { return logics.SelectedSkill; }
+            set { logics.SelectedSkill = value; OnPropertyChange(nameof(SelectedItemSkill)); }
         }
 
-        public int Episode
+        public ObservableCollection<ItemCombobox> Episodes
         {
-            get { return logics.Episode; }
-            set { logics.Episode = value; OnPropertyChange(nameof(Episode)); }
+            get { return episodes; }
+            set { skills = value; OnPropertyChange(nameof(Episodes)); }
+        }
+
+        public ItemCombobox SelectedItemEpisode
+        {
+            get { return logics.SelectedItemEpisode; }
+            set { logics.SelectedItemEpisode = value; OnPropertyChange(nameof(SelectedItemEpisode)); }
         }
 
         //Other settings vars
@@ -135,6 +150,16 @@ namespace ManagedDoom_extension.ViewModels
                     {
                         logics.IsChangedSettingsCheckBox();
                     }); }
+        }
+
+        private RelayCommand isChangedSkill;
+        public RelayCommand IsChangedSkill
+        {
+            get {
+                return isChangedSkill ??= new RelayCommand(obj =>
+            {
+                logics.IsChangedItemSkill();
+            }); }
         }
 
         private RelayCommand checkFullCommandButton;

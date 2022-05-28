@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-
-public class Skills
+//Template for combobobx choose skills
+public class ItemCombobox
 {
     private int id;
-    private string skill;
+    private string item;
 
     public int Id
     {
@@ -19,22 +19,22 @@ public class Skills
         }
     }
 
-    public string Skill
+    public string Item
     {
-        get { return skill; }
+        get { return item; }
         set
         {
-            if (skill != value)
+            if (item != value)
             {
-                skill = value;
-                NotifyPropertyChanged("Skill");
+                item = value;
+                NotifyPropertyChanged("Item");
             }
         }
     }
 
     public override string ToString()
     {
-        return string.Format("{1}", Id, Skill);
+        return string.Format("{1}", Id, Item);
     }
 
     public virtual event PropertyChangedEventHandler PropertyChanged;

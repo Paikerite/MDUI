@@ -13,6 +13,7 @@ namespace ManagedDoom_extension.Models
     {
         // Main vars
         private List<string> Command = new List<string>();
+        private int LastSelectedSkill { get; set; } // to remove last skill from command
 
         //Paths
         public string PathToSourcePort { get; set; }
@@ -22,8 +23,8 @@ namespace ManagedDoom_extension.Models
         public bool FastMonsters { get; set; }
         public bool NoMonsters { get; set; }
         public bool Respawn { get; set; }
-        public int Skill { get; set; }
-        public int Episode { get; set; }
+        public ItemCombobox SelectedSkill { get; set; }
+        public ItemCombobox SelectedItemEpisode { get; set; }
 
         // Other settings vars
         public bool NoMouse { get; set; }
@@ -179,19 +180,34 @@ namespace ManagedDoom_extension.Models
             if (response == true)
             {
                 string filepth = ofd.FileName;
-                PathToWad = "-iwad "+filepth;
+                PathToWad = filepth;
             }
 
             if (Command.ElementAtOrDefault(1) != null)
             {
-                Command[1] = PathToWad;
+                Command[1] = "-iwad " + PathToWad;
             }
             else
             {
-                Command.Insert(1, PathToWad);
+                Command.Insert(1, "-iwad " + PathToWad);
             }
 
             return PathToWad;
+        }
+
+        public void IsChangedItemSkill()
+        {
+            //LastSelectedSkill = "-skill " + SelectedSkill.Id.ToString();
+            string ss = "-skill " + SelectedSkill.Id.ToString();
+            if (!Command.Contains(ss))
+            {
+                Command.Add(ss);
+                LastSelectedSkill = Command.IndexOf(ss);
+            }
+            else
+            {
+                Command[LastSelectedSkill] = ss;
+            }
         }
 
         public void CheckFullCommand()
