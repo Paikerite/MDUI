@@ -13,17 +13,21 @@ namespace ManagedDoom_extension.Models
     {
         // Main vars
         private List<string> Command = new List<string>();
-        private int LastSelectedSkill { get; set; } // to remove last skill from command
+        private int LastSelectedEpisode { get; set; } = -1;
+        private int LastSelectedSkill { get; set; } = -1; // to remove last skill from command
+        private string SelectedItem { get; set; }
 
         //Paths
         public string PathToSourcePort { get; set; }
-        public string PathToWad { get; set; }
+        public string PathToWadorDeh { get; set; }
 
         // Settings vars
         public bool FastMonsters { get; set; }
         public bool NoMonsters { get; set; }
         public bool Respawn { get; set; }
-        public ItemCombobox SelectedSkill { get; set; }
+        public bool Deathmatch { get; set; }
+        public bool AltDeathmatch { get; set; }
+        public ItemCombobox SelectedItemSkill { get; set; }
         public ItemCombobox SelectedItemEpisode { get; set; }
 
         // Other settings vars
@@ -32,6 +36,7 @@ namespace ManagedDoom_extension.Models
         public bool NoSfx { get; set; }
         public bool NoMusic { get; set; }
         public bool NoDeh { get; set; }
+        public bool SoloNet { get; set; }
 
         //Functions
         public void IsChangedSettingsCheckBox()
@@ -85,6 +90,30 @@ namespace ManagedDoom_extension.Models
                 if (Command.Contains("-respawn"))
                 {
                     Command.Remove("-respawn");
+                }
+            }
+
+            if (Deathmatch)
+            {
+                if (!Command.Contains("-deathmatch")) Command.Add("-deathmatch");
+            }
+            else
+            {
+                if (Command.Contains("-deathmatch"))
+                {
+                    Command.Remove("-deathmatch");
+                }
+            }
+
+            if (AltDeathmatch)
+            {
+                if (!Command.Contains("-altdeath")) Command.Add("-altdeath");
+            }
+            else
+            {
+                if (Command.Contains("-altdeath"))
+                {
+                    Command.Remove("-altdeath");
                 }
             }
 
@@ -147,6 +176,18 @@ namespace ManagedDoom_extension.Models
                     Command.Remove("-nodeh");
                 }
             }
+
+            if (SoloNet)
+            {
+                if (!Command.Contains("-solo-net")) Command.Add("-solo-net");
+            }
+            else
+            {
+                if (Command.Contains("-solo-net"))
+                {
+                    Command.Remove("-solo-net");
+                }
+            }
         }
 
         public string CheckPathSourcePort()
@@ -172,41 +213,60 @@ namespace ManagedDoom_extension.Models
             return PathToSourcePort;
         }
 
-        public string CheckPathWad()
+        public string CheckPathWadorDeh()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "wad files (*.wad; *.WAD)|*.wad;*.WAD";
+            ofd.Filter = "wad files (*.wad; *.WAD)|*.wad;*.WAD|dehacked files (*.deh; *.DEH)|*.deh;*.DEH";
             bool? response = ofd.ShowDialog();
             if (response == true)
             {
                 string filepth = ofd.FileName;
-                PathToWad = filepth;
+                PathToWadorDeh = filepth;
+                if (Command.ElementAtOrDefault(1) != null)
+                {
+                    Command[1] = "-iwad " + PathToWadorDeh;
+                }
+                else
+                {
+                    Command.Insert(1, "-iwad " + PathToWadorDeh);
+                }
             }
 
-            if (Command.ElementAtOrDefault(1) != null)
-            {
-                Command[1] = "-iwad " + PathToWad;
-            }
-            else
-            {
-                Command.Insert(1, "-iwad " + PathToWad);
-            }
-
-            return PathToWad;
+            return PathToWadorDeh;
         }
 
         public void IsChangedItemSkill()
         {
             //LastSelectedSkill = "-skill " + SelectedSkill.Id.ToString();
-            string ss = "-skill " + SelectedSkill.Id.ToString();
-            if (!Command.Contains(ss))
+            SelectedItem = "-skill " + SelectedItemSkill.Id.ToString();
+            if (!Command.Contains(SelectedItem))
             {
-                Command.Add(ss);
-                LastSelectedSkill = Command.IndexOf(ss);
+                if (LastSelectedSkill == -1)
+                {
+                    Command.Add(SelectedItem);
+                    LastSelectedSkill = Command.IndexOf(SelectedItem);
+                }
+                else
+                {
+                    Command[LastSelectedSkill] = SelectedItem;
+                }
             }
-            else
+        }
+
+        public void IsChangedItemEpisode()
+        {
+            SelectedItem = "-episode " + SelectedItemEpisode.Id.ToString();
+            if (!Command.Contains(SelectedItem))
             {
-                Command[LastSelectedSkill] = ss;
+                if (LastSelectedEpisode == -1)
+                {
+                    Command.Add(SelectedItem);
+                    LastSelectedEpisode = Command.IndexOf(SelectedItem);
+                }
+                else
+                {
+                    Command[LastSelectedEpisode] = SelectedItem;
+                }
             }
         }
 

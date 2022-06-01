@@ -44,10 +44,10 @@ namespace ManagedDoom_extension.ViewModels
             get { return logics.PathToSourcePort; }
             set { logics.PathToSourcePort = value; OnPropertyChange(nameof(PathToSourcePort)); }
         }
-        public string PathToWad
+        public string PathToWadorDeh
         {
-            get { return logics.PathToWad; }
-            set { logics.PathToWad = value; OnPropertyChange(nameof(PathToWad)); }
+            get { return logics.PathToWadorDeh; }
+            set { logics.PathToWadorDeh = value; OnPropertyChange(nameof(PathToWadorDeh)); }
         }
 
         // Settings vars
@@ -69,6 +69,18 @@ namespace ManagedDoom_extension.ViewModels
             set { logics.Respawn = value; OnPropertyChange(nameof(Respawn)); }
         }
 
+        public bool Deathmatch
+        {
+            get { return logics.Deathmatch; }
+            set { logics.Deathmatch = value; OnPropertyChange(nameof(Deathmatch)); }
+        }
+
+        public bool AltDeathmatch
+        {
+            get { return logics.AltDeathmatch; }
+            set { logics.AltDeathmatch = value; OnPropertyChange(nameof(AltDeathmatch)); }
+        }
+
         public ObservableCollection<ItemCombobox> Skills
         {
             get { return skills; }
@@ -77,8 +89,8 @@ namespace ManagedDoom_extension.ViewModels
 
         public ItemCombobox SelectedItemSkill
         {
-            get { return logics.SelectedSkill; }
-            set { logics.SelectedSkill = value; OnPropertyChange(nameof(SelectedItemSkill)); }
+            get { return logics.SelectedItemSkill; }
+            set { logics.SelectedItemSkill = value; OnPropertyChange(nameof(SelectedItemSkill)); }
         }
 
         public ObservableCollection<ItemCombobox> Episodes
@@ -124,6 +136,12 @@ namespace ManagedDoom_extension.ViewModels
             set { logics.NoDeh = value; OnPropertyChange(nameof(NoDeh)); }
         }
 
+        public bool SoloNet
+        {
+            get { return logics.SoloNet; }
+            set { logics.SoloNet = value; OnPropertyChange(nameof(SoloNet)); }
+        }
+
         //Functions and Commands
         private RelayCommand checkPathToSourcePort;
         public RelayCommand CheckPathToSourcePort
@@ -134,12 +152,12 @@ namespace ManagedDoom_extension.ViewModels
             }); }
         }
 
-        private RelayCommand checkPathToWad;
-        public RelayCommand CheckPathToWad
+        private RelayCommand checkPathToWadOrDeh;
+        public RelayCommand CheckPathToWadOrDeh
         {
-            get { return checkPathToWad ??= new RelayCommand(obj =>
+            get { return checkPathToWadOrDeh ??= new RelayCommand(obj =>
             {
-                PathToWad = logics.CheckPathWad();
+                PathToWadorDeh = logics.CheckPathWadorDeh();
             }); }
         }
 
@@ -160,6 +178,18 @@ namespace ManagedDoom_extension.ViewModels
             {
                 logics.IsChangedItemSkill();
             }); }
+        }
+
+        private RelayCommand isChangedEpisode;
+        public RelayCommand IsChangedEpisode
+        {
+            get
+            {
+                return isChangedEpisode ??= new RelayCommand(obj =>
+                {
+                    logics.IsChangedItemEpisode();
+                });
+            }
         }
 
         private RelayCommand checkFullCommandButton;

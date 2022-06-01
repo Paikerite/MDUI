@@ -45,10 +45,10 @@
             <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="220" Height="20" Margin="0,0,3,0" VerticalAlignment="Stretch" MinWidth="155" HorizontalAlignment="Stretch"/>
             <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToSourcePort}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </StackPanel>
-        <Label Grid.Row="3" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to .wad file" />
+        <Label Grid.Row="3" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to .wad/.deh file" />
         <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWad}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="220" Height="20" Margin="0,0,3,0" VerticalAlignment="Stretch" MinWidth="155" />
-            <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToWad}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToWadOrDeh}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </StackPanel>
         <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="5,0,5,0" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Stretch"  Header="Map settings">
             <StackPanel Orientation="Horizontal">
@@ -56,6 +56,8 @@
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Fast monsters" Margin="0,2,0,2" IsChecked="{Binding FastMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No monsters" Margin="0,2,0,2" IsChecked="{Binding NoMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Respawn" Margin="0,2,0,2" IsChecked="{Binding Respawn, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
+                    <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Deathmatch" Margin="0,2,0,2" IsChecked="{Binding Deathmatch, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
+                    <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Altdeathmatch" Margin="0,2,0,2" IsChecked="{Binding AltDeathmatch, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <ComboBox Style="{StaticResource OldStyleComboBox}" ItemsSource="{Binding Skills}" SelectedItem="{Binding SelectedItemSkill}" SelectedIndex="0" Margin="0,2,0,2">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -66,7 +68,11 @@
                 </StackPanel>
                 <ListBox Margin="5,0,0,0" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" Width="100" SelectedIndex="-1" FontSize="11">
                     <!--<ListBoxItem Content="Select episode" FontSize="11" IsEnabled="False" Foreground="#FF958831"/>--> <!--#aaad71-->
-                    
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding IsChangedEpisode}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ListBox>
             </StackPanel>
         </GroupBox>
@@ -86,6 +92,7 @@
                 <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No sfx" Grid.Row="0" Grid.Column="1" Margin="0,2,0,2" IsChecked="{Binding NoSfx, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                 <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No music" Grid.Row="1" Grid.Column="1" Margin="0,2,0,2" IsChecked="{Binding NoMusic, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                 <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No deh" Grid.Row="2" Grid.Column="0" Margin="0,2,0,2" IsChecked="{Binding NoDeh, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
+                <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Solo net" Grid.Row="2" Grid.Column="2" Margin="0,2,0,2" IsChecked="{Binding SoloNet, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
             </Grid>
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
