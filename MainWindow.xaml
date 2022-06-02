@@ -47,7 +47,7 @@
         </StackPanel>
         <Label Grid.Row="3" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to .wad/.deh file" />
         <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWad}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="220" Height="20" Margin="0,0,3,0" VerticalAlignment="Stretch" MinWidth="155" />
+            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWadorDeh}" FontSize="11" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="220" Height="20" Margin="0,0,3,0" VerticalAlignment="Stretch" MinWidth="155" />
             <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToWadOrDeh}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </StackPanel>
         <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="5,0,5,0" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Stretch"  Header="Map settings">

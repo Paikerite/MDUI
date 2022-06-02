@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -221,14 +222,31 @@ namespace ManagedDoom_extension.Models
             if (response == true)
             {
                 string filepth = ofd.FileName;
+                FileInfo fileInfo = new FileInfo(filepth);
+                string fileExtension = fileInfo.Extension;
                 PathToWadorDeh = filepth;
+
                 if (Command.ElementAtOrDefault(1) != null)
                 {
-                    Command[1] = "-iwad " + PathToWadorDeh;
+                    if (fileExtension == ".wad" || fileExtension == ".WAD")
+                    {
+                        Command[1] = "-iwad " + PathToWadorDeh;
+                    }
+                    else if (fileExtension == ".deh" || fileExtension == ".DEH")
+                    {
+                        Command[1] = "-deh " + PathToWadorDeh;
+                    }
                 }
                 else
                 {
-                    Command.Insert(1, "-iwad " + PathToWadorDeh);
+                    if (fileExtension == ".wad" || fileExtension == ".WAD")
+                    {
+                        Command.Insert(1, "-iwad " + PathToWadorDeh);
+                    }
+                    else if (fileExtension == ".deh" || fileExtension == ".DEH")
+                    {
+                        Command.Insert(1, "-deh " + PathToWadorDeh);
+                    }
                 }
             }
 
