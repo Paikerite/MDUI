@@ -97,7 +97,7 @@
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Style="{StaticResource OldStyleButton}" Content="Debug Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}"/>
-            <Button Style="{StaticResource OldStyleButton}" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}"/>
+            <Button Style="{StaticResource OldStyleButton}" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}" IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Window>
