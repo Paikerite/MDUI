@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="./Themes/OldStyleCombobox.xaml"/>
                 <ResourceDictionary Source="./Themes/OldStyleListBox.xaml"/>
                 <ResourceDictionary Source="./Themes/OldStyleExpander.xaml"/>
+                <ResourceDictionary Source="./Themes/OldStyleRadioButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

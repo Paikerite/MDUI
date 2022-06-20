@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DataContext="{d:DesignInstance Type=local:ViewModel}"
         mc:Ignorable="d"
-        Title="ManagedDoom-extension" MaxHeight="640" MaxWidth="320" Height="480" Width="320" MinHeight="320" MinWidth="160"
+        Title="ManagedDoom-extension" MaxHeight="1270" MaxWidth="720" Height="480" Width="320" MinHeight="480" MinWidth="320"
         x:Name="ManagedDoomWindow"
         Style="{StaticResource OldStyleWindow}"
         FontFamily="Consolas">
@@ -25,7 +25,9 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="150"/>
-            <RowDefinition />
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Border BorderThickness="0" Margin="2,1,2,1" BorderBrush="Black" Grid.ColumnSpan="2" Background="#4c5945" MouseDown="Border_MouseDown">
@@ -41,18 +43,30 @@
             </Grid>
         </Border>
         <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to source port" />
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="220" Height="20" Margin="0,0,3,0" VerticalAlignment="Stretch" MinWidth="155" HorizontalAlignment="Stretch"/>
-            <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToSourcePort}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        </StackPanel>
+        <Grid Grid.Row="2" Margin="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="0,0,3,0" Width="Auto"/>
+            <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToSourcePort}" VerticalAlignment="Center" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" />
+        </Grid>
         <Label Grid.Row="3" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to .wad/.deh file" />
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWadorDeh}" FontSize="11" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="220" Height="20" Margin="0,0,3,0" VerticalAlignment="Stretch" MinWidth="155" />
+        <Grid Height="26" Margin="10,0,10,0" Grid.Row="4" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWadorDeh}" FontSize="11" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="20" MinWidth="222" Margin="0,0,3,0" VerticalAlignment="Stretch" />
             <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToWadOrDeh}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        </StackPanel>
-        <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="5,0,5,0" Padding="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Stretch"  Header="Map settings">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Width="165" Margin="0,0,0,0" >
+        </Grid>
+        <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="10,0,10,0" Padding="5,5,5,5" Header="Map settings" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Margin="0,0,5,0" >
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Fast monsters" Margin="0,2,0,2" IsChecked="{Binding FastMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No monsters" Margin="0,2,0,2" IsChecked="{Binding NoMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Respawn" Margin="0,2,0,2" IsChecked="{Binding Respawn, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
@@ -66,17 +80,20 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
                 </StackPanel>
-                <ListBox Margin="5,0,0,0" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" Width="100" SelectedIndex="-1" FontSize="11">
-                    <!--<ListBoxItem Content="Select episode" FontSize="11" IsEnabled="False" Foreground="#FF958831"/>--> <!--#aaad71-->
+                <ListBox Grid.Column="1" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" SelectedIndex="-1" FontSize="11">
+                    <!--<ListBoxItem Content="Select episode" FontSize="11" IsEnabled="False" Foreground="#FF958831"/>-->
+                    <!--#aaad71-->
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding IsChangedEpisode}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>
-            </StackPanel>
+            </Grid>
         </GroupBox>
-        <Expander Style="{StaticResource OldStyleExpander}" Grid.Row="6" Header="Other settings" Margin="10,5,10,0" Padding="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <CheckBox Style="{StaticResource OldStyleCheckBox}" x:Name="CheckIsEnabledTextBox" Grid.Row="6" Margin="10,0,10,0" Content="Warp" IsChecked="False" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="7" Style="{StaticResource OldStyleTextBox}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="10,0,10,0" Width="Auto" IsEnabled="{Binding ElementName=CheckIsEnabledTextBox, Path=IsChecked}" VerticalAlignment="Center"/>
+        <Expander Style="{StaticResource OldStyleExpander}" Grid.Row="8" Header="Other settings" Margin="10,0,10,0" Padding="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -95,7 +112,7 @@
                 <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Solo net" Grid.Row="2" Grid.Column="2" Margin="0,2,0,2" IsChecked="{Binding SoloNet, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
             </Grid>
         </Expander>
-        <StackPanel Orientation="Horizontal" Grid.Row="7" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Grid.Row="9" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Style="{StaticResource OldStyleButton}" Content="Debug Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}"/>
             <Button Style="{StaticResource OldStyleButton}" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}" IsEnabled="False"/>
         </StackPanel>

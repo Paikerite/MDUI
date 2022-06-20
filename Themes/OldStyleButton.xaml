@@ -19,31 +19,10 @@
                                 <ContentPresenter Content="{TemplateBinding Content}"
                                                   HorizontalAlignment="Left"
                                                   VerticalAlignment="Center" Margin="3,0,0,0"
-                                                  x:Name="Content"
-                                                  Tag="0">
-                                    <ContentPresenter.BitmapEffect>
-                                        <DropShadowBitmapEffect x:Name="Fakedepth" 
-                                                                Direction="270" 
-                                                                ShadowDepth="{Binding Tag, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" 
-                                                                Softness="0" 
-                                                                Color="Cyan"/>
-                                        <!--#f6f7eb-->
-                                    </ContentPresenter.BitmapEffect>
+                                                  x:Name="Content">
                                 </ContentPresenter>
                             </Grid>
                         </Border>
-                        <!--<VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Content"
-                                             Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#26301f"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>-->
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseCaptured" Value="True">
@@ -54,22 +33,17 @@
                             <Setter Property="Foreground" Value="#a5ad9f"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="#26301f"/>
-                            <Setter TargetName="Content" Property="Tag" Value="0.4"/>
-                            <!--<Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Fakedepth"
-                                            Storyboard.TargetProperty="ShadowDepth">
-                                            <EasingColorKeyFrame KeyTime="0" Value="0.4"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>-->
+                            <Trigger.Setters>
+                                <Setter Property="Foreground" Value="#26301f"/>
+                                <Setter TargetName="Content" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect  Direction="270" 
+                                                           ShadowDepth="0.4"
+                                                           Color="#f6f7eb" BlurRadius="1" Opacity="0.75"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger.Setters>
                         </Trigger>
-                        <!--<Trigger Property="IsEnabled" Value="True">
-                            <Setter TargetName="Fakedepth" Property="ShadowDepth" Value="0"/>
-                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

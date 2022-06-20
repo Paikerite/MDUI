@@ -1,11 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="TextBox"  x:Key="OldStyleTextBox">
+    <Style TargetType="{x:Type TextBox}" x:Key="OldStyleTextBox">
         <Setter Property="Foreground" Value="#f6f7eb"/>
         <Setter Property="Background" Value="#3f4638"/>
         <Setter Property="SelectionBrush" Value="#FF958831"/>
         <Setter Property="SelectionTextBrush" Value="#3f4638"/>
-        <!--<Setter Property="Cursor" Value="IBeam"/>-->
+        <Setter Property="SelectionOpacity" Value="1"/>
+        <!--<Setter Property="IsReadOnly" Value="False"/>-->
+        <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -21,6 +23,12 @@
                             </Grid>
                         </Border>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#4c5945"/>
+                            <Setter Property="Foreground" Value="#9ba591"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

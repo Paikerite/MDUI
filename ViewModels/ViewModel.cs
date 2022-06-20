@@ -18,7 +18,6 @@ namespace ManagedDoom_extension.ViewModels
         {
             logics = new Logics
             {
-
             };
 
             skills = new ObservableCollection<ItemCombobox>()
