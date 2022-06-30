@@ -62,9 +62,10 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <ContentPresenter Margin="4,0,0,0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            RecognizesAccessKey="True" />
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          RecognizesAccessKey="True" 
+                                          x:Name="Content"/>
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
@@ -72,6 +73,17 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="#FF958831"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#4c5945"/>
+                            <Setter Property="Foreground" Value="#26301f"/>
+                            <Setter TargetName="Content" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect  Direction="270" 
+                                                       ShadowDepth="0.5"
+                                                       Color="#f6f7eb" BlurRadius="1" Opacity="0.75"/>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

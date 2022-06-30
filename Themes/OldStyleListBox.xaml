@@ -22,16 +22,17 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="LeftUpBorder" Property="Background">
+                            <!--<Setter TargetName="LeftUpBorder" Property="Background">
                                 <Setter.Value>
                                     <SolidColorBrush Color="Cyan" />
                                 </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="LeftUpBorder" Property="BorderBrush">
+                            </Setter>-->
+                            <!--<Setter TargetName="LeftUpBorder" Property="BorderBrush">
                                 <Setter.Value>
                                     <SolidColorBrush Color="DarkBlue" />
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
+                            <Setter Property="Background" Value="#4c5945"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
@@ -76,6 +77,18 @@
                         </VisualStateManager.VisualStateGroups>
                         <ContentPresenter />
                     </Border>
+                    <!--<ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#26301f"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect  Direction="270" 
+                                                           ShadowDepth="0.5"
+                                                           Color="#f6f7eb" BlurRadius="1" Opacity="0.75"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

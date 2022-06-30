@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DataContext="{d:DesignInstance Type=local:ViewModel}"
         mc:Ignorable="d"
-        Title="ManagedDoom-extension" MaxHeight="1270" MaxWidth="720" Height="480" Width="320" MinHeight="480" MinWidth="320"
+        Title="ManagedDoom-extension" MaxHeight="1270" MaxWidth="720" Height="480" Width="340" MinHeight="480" MinWidth="320"
         x:Name="ManagedDoomWindow"
         Style="{StaticResource OldStyleWindow}"
         FontFamily="Consolas">
@@ -63,10 +63,11 @@
         <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="10,0,10,0" Padding="5,5,5,5" Header="Map settings" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="144*"/>
+                    <ColumnDefinition Width="121*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Vertical" Margin="0,0,5,0" >
+                <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.ColumnSpan="2" >
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Fast monsters" Margin="0,2,0,2" IsChecked="{Binding FastMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No monsters" Margin="0,2,0,2" IsChecked="{Binding NoMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Respawn" Margin="0,2,0,2" IsChecked="{Binding Respawn, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
@@ -80,7 +81,7 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
                 </StackPanel>
-                <ListBox Grid.Column="1" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" SelectedIndex="-1" FontSize="11">
+                <ListBox Grid.Column="1" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" SelectedIndex="-1" FontSize="11" Grid.ColumnSpan="2" Margin="144,0,0,0">
                     <!--<ListBoxItem Content="Select episode" FontSize="11" IsEnabled="False" Foreground="#FF958831"/>-->
                     <!--#aaad71-->
                     <i:Interaction.Triggers>
@@ -114,7 +115,7 @@
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="9" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Style="{StaticResource OldStyleButton}" Content="Debug Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}"/>
-            <Button Style="{StaticResource OldStyleButton}" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}" IsEnabled="False"/>
+            <Button Style="{StaticResource OldStyleButton}" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}"/>
         </StackPanel>
     </Grid>
 </Window>

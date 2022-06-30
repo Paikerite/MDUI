@@ -38,7 +38,7 @@
                                 <Setter TargetName="Content" Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect  Direction="270" 
-                                                           ShadowDepth="0.4"
+                                                           ShadowDepth="0.5"
                                                            Color="#f6f7eb" BlurRadius="1" Opacity="0.75"/>
                                     </Setter.Value>
                                 </Setter>
