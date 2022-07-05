@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DataContext="{d:DesignInstance Type=local:ViewModel}"
         mc:Ignorable="d"
-        Title="ManagedDoom-extension" MaxHeight="1270" MaxWidth="720" Height="480" Width="340" MinHeight="480" MinWidth="320"
+        Title="ManagedDoom-extension" MaxHeight="1270" MaxWidth="720" Height="520" Width="340" MinHeight="480" MinWidth="320"
         x:Name="ManagedDoomWindow"
         Style="{StaticResource OldStyleWindow}"
         FontFamily="Consolas">
@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="0,0,3,0" Width="Auto"/>
+            <TextBox x:Name="TextBoxPathToSource" IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="0,0,3,0" Width="Auto"/>
             <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToSourcePort}" VerticalAlignment="Center" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" />
         </Grid>
         <Label Grid.Row="3" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to .wad/.deh file" />
@@ -63,11 +63,10 @@
         <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="10,0,10,0" Padding="5,5,5,5" Header="Map settings" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="37*"/>
-                    <ColumnDefinition Width="144*"/>
-                    <ColumnDefinition Width="121*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.ColumnSpan="2" >
+                <StackPanel Orientation="Vertical" Margin="0,0,5,0" Grid.Column="0" >
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Fast monsters" Margin="0,2,0,2" IsChecked="{Binding FastMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="No monsters" Margin="0,2,0,2" IsChecked="{Binding NoMonsters, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
                     <CheckBox Style="{StaticResource OldStyleCheckBox}" Content="Respawn" Margin="0,2,0,2" IsChecked="{Binding Respawn, UpdateSourceTrigger=PropertyChanged}" Command="{Binding IsChangedSettings}"/>
@@ -81,7 +80,7 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
                 </StackPanel>
-                <ListBox Grid.Column="1" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" SelectedIndex="-1" FontSize="11" Grid.ColumnSpan="2" Margin="144,0,0,0">
+                <ListBox Grid.Column="1" Style="{StaticResource OldStyleListBox}" ItemsSource="{Binding Episodes}" SelectedItem="{Binding SelectedItemEpisode}" SelectedIndex="-1" FontSize="11" Margin="0,0,0,0">
                     <!--<ListBoxItem Content="Select episode" FontSize="11" IsEnabled="False" Foreground="#FF958831"/>-->
                     <!--#aaad71-->
                     <i:Interaction.Triggers>
@@ -92,8 +91,15 @@
                 </ListBox>
             </Grid>
         </GroupBox>
-        <CheckBox Style="{StaticResource OldStyleCheckBox}" x:Name="CheckIsEnabledTextBox" Grid.Row="6" Margin="10,0,10,0" Content="Warp" IsChecked="False" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="7" Style="{StaticResource OldStyleTextBox}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="10,0,10,0" Width="Auto" IsEnabled="{Binding ElementName=CheckIsEnabledTextBox, Path=IsChecked}" VerticalAlignment="Center"/>
+        <CheckBox Style="{StaticResource OldStyleCheckBox}" IsChecked="{Binding CheckBoxWarp}" Command="{Binding IsChangedWarp}" x:Name="CheckIsEnabledTextBox" Grid.Row="6" Margin="10,0,10,0" Content="Warp" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="7" Style="{StaticResource OldStyleTextBox}" Text="{Binding Warp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="10,0,10,0" Width="Auto" IsEnabled="{Binding ElementName=CheckIsEnabledTextBox, Path=IsChecked}" VerticalAlignment="Center" Cursor="IBeam" IsInactiveSelectionHighlightEnabled="True" TextWrapping="WrapWithOverflow">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding IsChangedWarp}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+        </TextBox>
         <Expander Style="{StaticResource OldStyleExpander}" Grid.Row="8" Header="Other settings" Margin="10,0,10,0" Padding="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
@@ -114,8 +120,8 @@
             </Grid>
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="9" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Style="{StaticResource OldStyleButton}" Content="Debug Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}"/>
-            <Button Style="{StaticResource OldStyleButton}" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}"/>
+            <Button Style="{StaticResource OldStyleButton}" Content="Debug Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}" Visibility="Collapsed"/>
+            <Button Style="{StaticResource OldStyleButton}" IsEnabled="True" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ManagedDoom_extension.Models
@@ -16,6 +14,7 @@ namespace ManagedDoom_extension.Models
         private List<string> Command = new List<string>();
         private int LastSelectedEpisode { get; set; } = -1;
         private int LastSelectedSkill { get; set; } = -1; // to remove last skill from command
+        private int IndexOfWarp { get; set; } = -1;
         private string SelectedItem { get; set; }
 
         //Paths
@@ -30,6 +29,8 @@ namespace ManagedDoom_extension.Models
         public bool AltDeathmatch { get; set; }
         public ItemCombobox SelectedItemSkill { get; set; }
         public ItemCombobox SelectedItemEpisode { get; set; }
+        public bool CheckBoxWarp { get; set; }
+        public string Warp { get; set; }
 
         // Other settings vars
         public bool NoMouse { get; set; }
@@ -251,6 +252,31 @@ namespace ManagedDoom_extension.Models
             }
 
             return PathToWadorDeh;
+        }
+
+        public void CheckWarp()
+        {
+            if (CheckBoxWarp == true)
+            {
+                SelectedItem = "-warp " + Warp;
+                if (!Command.Contains(SelectedItem))
+                {
+                    if (IndexOfWarp == -1)
+                    {
+                        Command.Add(SelectedItem);
+                        IndexOfWarp = Command.IndexOf(SelectedItem);
+                    }
+                    else
+                    {
+                        Command[IndexOfWarp] = SelectedItem;
+                    }
+                }
+            }
+            else
+            {
+                Command.RemoveAt(IndexOfWarp);
+                IndexOfWarp = -1;
+            }
         }
 
         public void IsChangedItemSkill()

@@ -37,6 +37,7 @@ namespace ManagedDoom_extension.ViewModels
                 new ItemCombobox(){Id = 4, Item="4 episode"}
             };
         }
+
         //Paths
         public string PathToSourcePort
         {
@@ -102,6 +103,25 @@ namespace ManagedDoom_extension.ViewModels
         {
             get { return logics.SelectedItemEpisode; }
             set { logics.SelectedItemEpisode = value; OnPropertyChange(nameof(SelectedItemEpisode)); }
+        }
+
+        public bool CheckBoxWarp
+        {
+            get { return logics.CheckBoxWarp; }
+            set { logics.CheckBoxWarp = value; OnPropertyChange(nameof(CheckBoxWarp)); }
+        }
+
+        public string Warp
+        {
+            get { return logics.Warp; }
+            set
+            {
+                if (logics.Warp != value)
+                {
+                    logics.Warp = value;
+                    OnPropertyChange(nameof(Warp));
+                }
+            }
         }
 
         //Other settings vars
@@ -187,6 +207,18 @@ namespace ManagedDoom_extension.ViewModels
                 return isChangedEpisode ??= new RelayCommand(obj =>
                 {
                     logics.IsChangedItemEpisode();
+                });
+            }
+        }
+
+        private RelayCommand isChangedWarp;
+        public RelayCommand IsChangedWarp
+        {
+            get
+            {
+                return isChangedWarp ??= new RelayCommand(obj =>
+                {
+                    logics.CheckWarp();
                 });
             }
         }
