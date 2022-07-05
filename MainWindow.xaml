@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextBoxPathToSource" IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="0,0,3,0" Width="Auto"/>
+            <TextBox x:Name="TextBoxPathToSource" IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToSourcePort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="0,0,3,0" Width="Auto" Cursor="IBeam"/>
             <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToSourcePort}" VerticalAlignment="Center" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" />
         </Grid>
         <Label Grid.Row="3" HorizontalAlignment="Center" FontSize="14" Foreground="#818b78" Content="Path to .wad/.deh file" />
@@ -92,13 +92,12 @@
             </Grid>
         </GroupBox>
         <CheckBox Style="{StaticResource OldStyleCheckBox}" IsChecked="{Binding CheckBoxWarp}" Command="{Binding IsChangedWarp}" x:Name="CheckIsEnabledTextBox" Grid.Row="6" Margin="10,0,10,0" Content="Warp" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="7" Style="{StaticResource OldStyleTextBox}" Text="{Binding Warp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="10,0,10,0" Width="Auto" IsEnabled="{Binding ElementName=CheckIsEnabledTextBox, Path=IsChecked}" VerticalAlignment="Center" Cursor="IBeam" IsInactiveSelectionHighlightEnabled="True" TextWrapping="WrapWithOverflow">
+        <TextBox Grid.Row="7" Style="{StaticResource OldStyleTextBox}" Text="{Binding Warp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="TextBoxWarp" PreviewTextInput="TextBox_PreviewTextInput" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="20" Margin="10,0,10,0" Width="Auto" IsEnabled="{Binding ElementName=CheckIsEnabledTextBox, Path=IsChecked}" VerticalAlignment="Center" Cursor="IBeam">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <i:InvokeCommandAction Command="{Binding IsChangedWarp}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-
         </TextBox>
         <Expander Style="{StaticResource OldStyleExpander}" Grid.Row="8" Header="Other settings" Margin="10,0,10,0" Padding="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Grid>
@@ -120,7 +119,7 @@
             </Grid>
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="9" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Style="{StaticResource OldStyleButton}" Content="Debug Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}" Visibility="Collapsed"/>
+            <Button Style="{StaticResource OldStyleButton}" Content="Show Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}" Visibility="Visible"/>
             <Button Style="{StaticResource OldStyleButton}" IsEnabled="True" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}"/>
         </StackPanel>
     </Grid>

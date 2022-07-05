@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
+    <SolidColorBrush x:Key="ArrowColor" Color="#aeb7a8"/>
+
     <ControlTemplate x:Key="ComboBoxToggleButton"
                  TargetType="{x:Type ToggleButton}">
         <Grid Background="{TemplateBinding Background}">
@@ -37,7 +39,7 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Data="M 0 0 L 4 4 L 8 0 Z" 
-                  Fill="#aeb7a8">
+                  Fill="{DynamicResource ArrowColor}">
             </Path>
         </Grid>
     </ControlTemplate>
@@ -154,6 +156,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="#4c5945"/>
+                            <!--<Setter TargetName="ArrowColor" Property="Color" Value="Orange"/>-->
                             <!--<Setter TargetName="ToggleButton" Property="Fill" Value="#1d2714"/>-->
                         </Trigger>
                     </ControlTemplate.Triggers>

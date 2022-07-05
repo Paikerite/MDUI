@@ -1,11 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Style TargetType="{x:Type TextBox}" x:Key="OldStyleTextBox">
+        <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+        <Setter Property="OverridesDefaultStyle"
+          Value="True" />
+        <Setter Property="KeyboardNavigation.TabNavigation"
+          Value="None" />
+        <Setter Property="FocusVisualStyle"
+          Value="{x:Null}" />
+        <Setter Property="AllowDrop"
+          Value="true" />
         <Setter Property="Foreground" Value="#f6f7eb"/>
         <Setter Property="Background" Value="#3f4638"/>
+        <Setter Property="Focusable" Value="True"/>
         <Setter Property="SelectionBrush" Value="#FF958831"/>
         <Setter Property="SelectionTextBrush" Value="#3f4638"/>
-        <Setter Property="SelectionOpacity" Value="1"/>
+        <Setter Property="SelectionOpacity" Value="0.5"/>
         <!--<Setter Property="IsReadOnly" Value="False"/>-->
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="Template">
@@ -13,13 +25,11 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border BorderThickness="1,1,0,0" BorderBrush="#262d20" x:Name="LeftUpBorder">
                         <Border BorderThickness="0,0,1,1" BorderBrush="#87917e" x:Name="RightDownBorder">
-                            <Grid>
-                                <Rectangle Fill="{TemplateBinding Background}" Cursor="{TemplateBinding Cursor}"/>
-                                <ContentPresenter Content="{TemplateBinding Text}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                  Margin="3,0,0,0">
-                                </ContentPresenter>
+                            <Grid Background="{TemplateBinding Background}" Cursor="{TemplateBinding Cursor}">
+                                <!--MOST IMPORTANT THIS FOR TEXTBOX -->
+                                <ScrollViewer Margin="0"
+                                              x:Name="PART_ContentHost" />
+                                <!--MOST IMPORTANT THIS FOR TEXTBOX -->
                             </Grid>
                         </Border>
                     </Border>
