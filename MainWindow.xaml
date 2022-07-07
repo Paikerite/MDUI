@@ -124,15 +124,21 @@
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource OldStyleButton}">
                         <Style.Triggers>
-                            <MultiDataTrigger>
+                            <!--<MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding ElementName=TextBoxPathToSource, Path=Text}" Value=""/>
-                                    <Condition Binding="{Binding ElementName=TextBoxPathToWadorDeh, Path=Text}" Value=""/>
+                                    <Condition Binding="{Binding ElementName=TextBoxPathToSource, Path=Text.IsEmpty}" Value="True"/>
+                                    <Condition Binding="{Binding ElementName=TextBoxPathToWadorDeh, Path=Text.IsEmpty}" Value="True"/>
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
                                     <Setter Property="IsEnabled" Value="False"/>
                                 </MultiDataTrigger.Setters>
-                            </MultiDataTrigger>
+                            </MultiDataTrigger>-->
+                            <DataTrigger Binding="{Binding ElementName=TextBoxPathToSource, Path=Text.IsEmpty}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=TextBoxPathToWadorDeh, Path=Text.IsEmpty}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

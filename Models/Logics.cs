@@ -48,24 +48,23 @@ namespace ManagedDoom_extension.Models
             if (fileInfo.Exists)
             {
                 PathToSourcePort = fileInfo.FullName;
-                Command.Add(PathToSourcePort);
+                Command[0] = PathToSourcePort;
             }
             string[] tmparray = Directory.GetFiles(Directory.GetCurrentDirectory());
 
             foreach (string item in tmparray)
             {
-                //string[] AllowExtension = new string[] {".wad", ".WAD", ".DEH", ".deh"};
                 string FileExtension = Path.GetExtension(item);
 
                 if (FileExtension == ".wad" || FileExtension == ".WAD")
                 {
                     PathToWadorDeh = item;
-                    Command.Add("-iwad " + PathToWadorDeh);
+                    Command[1] = "-iwad " + PathToWadorDeh;
                 }
                 else if (FileExtension == ".deh" || FileExtension == ".DEH")
                 {
                     PathToWadorDeh = item;
-                    Command.Add("-deh " + PathToWadorDeh);
+                    Command[1] = "-deh " + PathToWadorDeh;
                 }
             }
         }
@@ -233,14 +232,7 @@ namespace ManagedDoom_extension.Models
                 PathToSourcePort = filepth;
             }
 
-            if (Command.ElementAtOrDefault(0) != null)
-            {
-                Command[0] = PathToSourcePort;
-            }
-            else
-            {
-                Command.Insert(0, PathToSourcePort);
-            }
+            Command[0] = PathToSourcePort;
 
             return PathToSourcePort;
         }
@@ -257,27 +249,13 @@ namespace ManagedDoom_extension.Models
                 string fileExtension = fileInfo.Extension;
                 PathToWadorDeh = filepth;
 
-                if (Command.ElementAtOrDefault(1) != null)
+                if (fileExtension == ".wad" || fileExtension == ".WAD")
                 {
-                    if (fileExtension == ".wad" || fileExtension == ".WAD")
-                    {
-                        Command[1] = "-iwad " + PathToWadorDeh;
-                    }
-                    else if (fileExtension == ".deh" || fileExtension == ".DEH")
-                    {
-                        Command[1] = "-deh " + PathToWadorDeh;
-                    }
+                    Command[1] = "-iwad " + PathToWadorDeh;
                 }
-                else
+                else if (fileExtension == ".deh" || fileExtension == ".DEH")
                 {
-                    if (fileExtension == ".wad" || fileExtension == ".WAD")
-                    {
-                        Command.Insert(1, "-iwad " + PathToWadorDeh);
-                    }
-                    else if (fileExtension == ".deh" || fileExtension == ".DEH")
-                    {
-                        Command.Insert(1, "-deh " + PathToWadorDeh);
-                    }
+                    Command[1] = "-deh " + PathToWadorDeh;
                 }
             }
 
