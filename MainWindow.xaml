@@ -57,7 +57,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            <TextBox IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWadorDeh}" FontSize="11" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="20" MinWidth="222" Margin="0,0,3,0" VerticalAlignment="Stretch" />
+            <TextBox x:Name="TextBoxPathToWadorDeh" IsReadOnly="True" Style="{StaticResource OldStyleTextBox}" Text="{Binding PathToWadorDeh}" FontSize="11" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="20" MinWidth="222" Margin="0,0,3,0" VerticalAlignment="Stretch" />
             <Button Grid.Column="1" Style="{StaticResource OldStyleButton}" Content="Browse" Command="{Binding CheckPathToWadOrDeh}" VerticalAlignment="Center" Width="73" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
         <GroupBox Style="{StaticResource OldStyleGroupBox}" Grid.Row="5" Margin="10,0,10,0" Padding="5,5,5,5" Header="Map settings" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -120,7 +120,23 @@
         </Expander>
         <StackPanel Orientation="Horizontal" Grid.Row="9" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Style="{StaticResource OldStyleButton}" Content="Show Command" FontSize="9" Width="73" Height="25" Command="{Binding CheckFullCommandButton}" Visibility="Visible"/>
-            <Button Style="{StaticResource OldStyleButton}" IsEnabled="True" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}"/>
+            <Button x:Name="StartButton" Content="Play" Width="73" Height="25" Command="{Binding PlayDoomFuckYea}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource OldStyleButton}">
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=TextBoxPathToSource, Path=Text}" Value=""/>
+                                    <Condition Binding="{Binding ElementName=TextBoxPathToWadorDeh, Path=Text}" Value=""/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

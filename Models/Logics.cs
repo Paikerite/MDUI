@@ -7,11 +7,11 @@ using System.Linq;
 using System.Windows;
 
 namespace ManagedDoom_extension.Models
-{
+{ 
     sealed class Logics
     {
         // Main vars
-        private List<string> Command = new List<string>();
+        private List<string> Command = new List<string>() { "", "" };
         private int LastSelectedEpisode { get; set; } = -1;
         private int LastSelectedSkill { get; set; } = -1; // to remove last skill from command
         private int IndexOfWarp { get; set; } = -1;
@@ -39,6 +39,36 @@ namespace ManagedDoom_extension.Models
         public bool NoMusic { get; set; }
         public bool NoDeh { get; set; }
         public bool SoloNet { get; set; }
+
+        public Logics()
+        {
+            //Get source engine and .wad\.deh if exists in currect directory
+
+            FileInfo fileInfo = new(@"managed-doom.exe");
+            if (fileInfo.Exists)
+            {
+                PathToSourcePort = fileInfo.FullName;
+                Command.Add(PathToSourcePort);
+            }
+            string[] tmparray = Directory.GetFiles(Directory.GetCurrentDirectory());
+
+            foreach (string item in tmparray)
+            {
+                //string[] AllowExtension = new string[] {".wad", ".WAD", ".DEH", ".deh"};
+                string FileExtension = Path.GetExtension(item);
+
+                if (FileExtension == ".wad" || FileExtension == ".WAD")
+                {
+                    PathToWadorDeh = item;
+                    Command.Add("-iwad " + PathToWadorDeh);
+                }
+                else if (FileExtension == ".deh" || FileExtension == ".DEH")
+                {
+                    PathToWadorDeh = item;
+                    Command.Add("-deh " + PathToWadorDeh);
+                }
+            }
+        }
 
         //Functions
         public void IsChangedSettingsCheckBox()
