@@ -50,6 +50,12 @@ namespace ManagedDoom_extension.ViewModels
             set { logics.PathToWadorDeh = value; OnPropertyChange(nameof(PathToWadorDeh)); }
         }
 
+        public string PathToAdditionalFile
+        {
+            get { return logics.PathToAdditionalFile; }
+            set { logics.PathToAdditionalFile = value; OnPropertyChange(nameof(PathToAdditionalFile)); }
+        }
+
         // Settings vars
         public bool FastMonsters
         {
@@ -109,6 +115,12 @@ namespace ManagedDoom_extension.ViewModels
         {
             get { return logics.CheckBoxWarp; }
             set { logics.CheckBoxWarp = value; OnPropertyChange(nameof(CheckBoxWarp)); }
+        }
+
+        public bool CheckBoxMod
+        {
+            get { return logics.CheckBoxMod; }
+            set { logics.CheckBoxMod = value; OnPropertyChange(nameof(CheckBoxMod)); }
         }
 
         public string Warp
@@ -180,6 +192,15 @@ namespace ManagedDoom_extension.ViewModels
             }); }
         }
 
+        private RelayCommand checkPathToAdditionalFile;
+        public RelayCommand CheckPathToAdditionalFile
+        { 
+            get { return checkPathToAdditionalFile ??= new RelayCommand(obj => 
+            {
+                PathToAdditionalFile = logics.CheckPathAdditionalFile();
+            }); }
+        }
+
         private RelayCommand isChangedSettings;
         public RelayCommand IsChangedSettings
         {
@@ -223,6 +244,18 @@ namespace ManagedDoom_extension.ViewModels
             }
         }
 
+        private RelayCommand isChangedModStatus;
+        public RelayCommand IsChangedModStatus
+        {
+            get
+            {
+                return isChangedModStatus ??= new RelayCommand(obj =>
+                {
+                    logics.CheckAdditionalFile();
+                });
+            }
+        }
+
         private RelayCommand checkFullCommandButton;
         public RelayCommand CheckFullCommandButton 
         { 
@@ -238,6 +271,16 @@ namespace ManagedDoom_extension.ViewModels
             get { return playDoomFuckYea ??= new RelayCommand(obj =>
             {
                 logics.Play();
+            }); }
+        }
+
+        private RelayCommand showAbout;
+        public RelayCommand ShowAbout
+        {
+            get {
+                return showAbout ??= new RelayCommand(obj =>
+            {
+                logics.AboutProgram();
             }); }
         }
 

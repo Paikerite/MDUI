@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ManagedDoom_extension.Views;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,15 +12,17 @@ namespace ManagedDoom_extension.Models
     sealed class Logics
     {
         // Main vars
-        private List<string> Command = new List<string>() { "", "" };
+        private List<string> Command = new List<string>() { "", "" }; // reserved for PathToSourcePort and PathToWadorDeh
         private int LastSelectedEpisode { get; set; } = -1;
         private int LastSelectedSkill { get; set; } = -1; // to remove last skill from command
         private int IndexOfWarp { get; set; } = -1;
+        private int IndexOfMod { get; set; } = -1;
         private string SelectedItem { get; set; }
 
         //Paths
         public string PathToSourcePort { get; set; }
         public string PathToWadorDeh { get; set; }
+        public string PathToAdditionalFile { get; set; }
 
         // Settings vars
         public bool FastMonsters { get; set; }
@@ -30,6 +33,7 @@ namespace ManagedDoom_extension.Models
         public ItemCombobox SelectedItemSkill { get; set; }
         public ItemCombobox SelectedItemEpisode { get; set; }
         public bool CheckBoxWarp { get; set; }
+        public bool CheckBoxMod { get; set; }
         public string Warp { get; set; }
 
         // Other settings vars
@@ -262,6 +266,50 @@ namespace ManagedDoom_extension.Models
             return PathToWadorDeh;
         }
 
+        public string CheckPathAdditionalFile()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "wad files (*.wad; *.WAD)|*.wad;*.WAD";
+            bool? response = ofd.ShowDialog();
+            if (response == true)
+            {
+                string filepth = ofd.FileName;
+                FileInfo fileInfo = new FileInfo(filepth);
+                string fileExtension = fileInfo.Extension;
+                PathToAdditionalFile = filepth;
+                CheckAdditionalFile();
+
+            }
+
+            return PathToAdditionalFile;
+        }
+
+        public void CheckAdditionalFile()
+        {
+            if (CheckBoxMod == true)
+            {
+
+                SelectedItem = "-file " + PathToAdditionalFile;
+                if (!Command.Contains(SelectedItem))
+                {
+                    if (IndexOfMod == -1)
+                    {
+                        Command.Add(SelectedItem);
+                        IndexOfMod = Command.IndexOf(SelectedItem);
+                    }
+                    else
+                    {
+                        Command[IndexOfMod] = SelectedItem;
+                    }
+                }
+            }
+            else
+            {
+                Command.RemoveAt(IndexOfMod);
+                IndexOfMod = -1;
+            }
+        }
+
         public void CheckWarp()
         {
             if (CheckBoxWarp == true)
@@ -325,6 +373,12 @@ namespace ManagedDoom_extension.Models
         public void CheckFullCommand()
         {
             MessageBox.Show(string.Join(' ', Command), "Info", MessageBoxButton.OK);
+        }
+
+        public void AboutProgram()
+        {
+            About about = new About();
+            about.Show();
         }
 
         public void Play()
