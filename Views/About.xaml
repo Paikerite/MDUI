@@ -10,7 +10,7 @@
         Style="{StaticResource OldStyleWindow}"
         FontFamily="Consolas"
         mc:Ignorable="d"
-        Title="About" Height="240" Width="320">
+        Title="About" MaxHeight="240" MaxWidth="320" Height="240" Width="320">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -28,5 +28,9 @@
                 </StackPanel>
             </Grid>
         </Border>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Label Margin="10,0,10,0" Foreground="#f6f7eb" FontWeight="SemiBold" Content="Made by Senya" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Label Margin="10,0,10,0" Foreground="#f6f7eb" FontWeight="SemiBold" Content="2022" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>

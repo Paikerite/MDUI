@@ -51,7 +51,7 @@ namespace ManagedDoom_extension.Views
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Close();
+            Close();
         }
     }
 }

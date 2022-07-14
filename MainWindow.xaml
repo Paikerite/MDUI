@@ -37,7 +37,7 @@
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                     <Image Source="Views\media\caco.png" Width="16" Height="16" Visibility="Visible" Margin="1,0,0,0">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseUp">
+                            <i:EventTrigger EventName="MouseDown">
                                 <i:InvokeCommandAction Command="{Binding ShowAbout}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>

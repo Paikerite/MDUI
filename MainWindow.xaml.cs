@@ -55,7 +55,7 @@ namespace ManagedDoom_extension
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
