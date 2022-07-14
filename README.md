@@ -1,5 +1,5 @@
 # MDUI
-Graphical user interface for other project ManagedDoom by sinshu.
+Graphical user interface for other project [ManagedDoom by sinshu](https://github.com/sinshu/managed-doom).
 Created to launch source port to avoid using a console.
 
 # Screenshot
