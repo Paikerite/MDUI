@@ -1,4 +1,4 @@
-﻿using ManagedDoom_extension.Views;
+﻿using ManagedDoomUI.Views;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 
-namespace ManagedDoom_extension.Models
+namespace ManagedDoomUI.Models
 { 
     sealed class Logics
     {

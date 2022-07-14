@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows7.0</TargetFramework>
-    <RootNamespace>ManagedDoom_extension</RootNamespace>
+    <RootNamespace>ManagedDoomUI</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <PackageIcon>caco.png</PackageIcon>

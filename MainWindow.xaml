@@ -1,13 +1,13 @@
-﻿<Window x:Class="ManagedDoom_extension.MainWindow"
+﻿<Window x:Class="ManagedDoomUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ManagedDoom_extension.ViewModels" 
+        xmlns:local="clr-namespace:ManagedDoomUI.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DataContext="{d:DesignInstance Type=local:ViewModel}"
         mc:Ignorable="d"
-        Title="ManagedDoom-extension" MaxHeight="1270" MaxWidth="720" Height="580" Width="340" MinHeight="480" MinWidth="320"
+        Title="ManagedDoomUI" MaxHeight="1270" MaxWidth="720" Height="580" Width="340" MinHeight="480" MinWidth="320"
         x:Name="ManagedDoomWindow"
         Style="{StaticResource OldStyleWindow}"
         FontFamily="Consolas">
@@ -42,7 +42,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Image>
-                    <Label Content="ManagedDoom-extension" Foreground="#f6f7eb" FontWeight="SemiBold" Margin="1,0,0,0" FontStyle="Normal" FontStretch="Normal"></Label>
+                    <Label Content="ManagedDoomUI" Foreground="#f6f7eb" FontWeight="SemiBold" Margin="1,0,0,0" FontStyle="Normal" FontStretch="Normal"></Label>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button Width="20" Height="20" Content="_" FontSize="14" Style="{StaticResource OldStyleButton}" Foreground="#87917e" FontWeight="ExtraBold" Click="Button_Click_Minimized" Margin="0,0,1,0"/>

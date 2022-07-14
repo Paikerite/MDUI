@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ManagedDoom_extension.Views
+namespace ManagedDoomUI.Views
 {
     /// <summary>
     /// Логика взаимодействия для About.xaml

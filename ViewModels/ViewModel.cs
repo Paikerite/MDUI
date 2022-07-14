@@ -1,4 +1,4 @@
-﻿using ManagedDoom_extension.Models;
+﻿using ManagedDoomUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManagedDoom_extension.ViewModels
+namespace ManagedDoomUI.ViewModels
 {
     public class ViewModel : INotifyPropertyChanged
     {

@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ManagedDoom_extension.ViewModels;
+using ManagedDoomUI.ViewModels;
 
-namespace ManagedDoom_extension
+namespace ManagedDoomUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

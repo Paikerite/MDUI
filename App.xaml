@@ -1,7 +1,7 @@
-﻿<Application x:Class="ManagedDoom_extension.App"
+﻿<Application x:Class="ManagedDoomUI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ManagedDoom_extension"
+             xmlns:local="clr-namespace:ManagedDoomUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
